@@ -1,11 +1,16 @@
 version: "3"
 services:
-  tuic-server:
-    container_name: tuic-server
-    image: monkeyray/tuic:latest
+  tuic_server:
+    image: lhie1/tuic-server:latest
+    container_name: tuic_server
     restart: always
     network_mode: host
     volumes:
-      - ./config.json:/etc/tuic/config.json:ro
-      - ./fullchain.pem:/etc/tuic/fullchain.pem:ro
-      - ./private.pem:/etc/tuic/private.pem:ro
+      - ./config.json:/etc/tuic/config.json
+      - ./fullchain.pem:/etc/tuic/fullchain.pem
+      - ./private.pem:/etc/tuic/private.pem
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
